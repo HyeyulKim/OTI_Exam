@@ -5,13 +5,104 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>김혜율</title>
 <style>
-  body { font-family: "Segoe UI", "Malgun Gothic", sans-serif; margin: 40px; color: #1f2430; }
-  a.back { display: inline-block; margin-bottom: 20px; color: #4f46e5; text-decoration: none; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Segoe UI", "Malgun Gothic", sans-serif;
+    background: #f4f5f7;
+    color: #1f2430;
+  }
+  .card {
+    width: 100%;
+    max-width: 480px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    padding: 40px 32px;
+  }
+  a.back {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #4f46e5;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  h1 {
+    margin: 0 0 4px;
+    font-size: 24px;
+  }
+  p.role {
+    margin: 0 0 24px;
+    color: #6b7280;
+    font-size: 14px;
+  }
+  p.intro {
+    margin: 0 0 24px;
+    line-height: 1.6;
+  }
+  h2 {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: #374151;
+  }
+  ul.stack {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  ul.stack li {
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: #eef1ff;
+    border: 1px solid #c7d2fe;
+    font-size: 13px;
+    color: #4338ca;
+  }
+  ul.contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+  }
+  ul.contact a {
+    color: #1f2430;
+    text-decoration: none;
+  }
+  ul.contact a:hover {
+    color: #4f46e5;
+  }
 </style>
 </head>
 <body>
-  <a class="back" href="index.html">&larr; 메인으로</a>
-  <h1>김혜율</h1>
-  <p>준비 중입니다.</p>
+  <div class="card">
+    <a class="back" href="index.html">&larr; 메인으로</a>
+    <h1>김혜율</h1>
+    <p class="role">Android Developer &rarr; Full-Stack Developer</p>
+    <p class="intro">안드로이드 개발자에서 풀스택 개발자로의 커리어 전환을 꿈꿉니다.</p>
+
+    <h2>기술 스택</h2>
+    <ul class="stack">
+      <li>Java</li>
+      <li>Spring Boot</li>
+      <li>Bootstrap</li>
+      <li>AWS</li>
+    </ul>
+
+    <h2>연락처</h2>
+    <ul class="contact">
+      <li>Email: <a href="mailto:hyeyul102500@gmail.com">hyeyul102500@gmail.com</a></li>
+      <li>GitHub: <a href="https://github.com/HyeyulKim" target="_blank" rel="noopener">github.com/HyeyulKim</a></li>
+    </ul>
+  </div>
 </body>
 </html>
