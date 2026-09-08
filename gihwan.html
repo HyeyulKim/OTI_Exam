@@ -3,15 +3,303 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>박기환</title>
+<meta name="description" content="박기환의 프로필 페이지">
+<title>박기환 | Profile</title>
 <style>
-  body { font-family: "Segoe UI", "Malgun Gothic", sans-serif; margin: 40px; color: #1f2430; }
-  a.back { display: inline-block; margin-bottom: 20px; color: #4f46e5; text-decoration: none; }
+  :root {
+    --ink: #14213d;
+    --muted: #6f7890;
+    --paper: #f4f7fb;
+    --white: #ffffff;
+    --line: #e3e8f0;
+    --accent: #ef8354;
+    --accent-dark: #d9663a;
+    --blue: #2f5bea;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    color: var(--ink);
+    font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background:
+      radial-gradient(circle at 12% 10%, rgba(239, 131, 84, 0.18), transparent 28%),
+      radial-gradient(circle at 92% 84%, rgba(47, 91, 234, 0.12), transparent 32%),
+      var(--paper);
+  }
+
+  a { color: inherit; }
+
+  .page {
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: 28px 0 48px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 56px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .brand-mark {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 9px;
+    color: var(--white);
+    background: var(--ink);
+    font-size: 12px;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  .back:hover { color: var(--ink); transform: translateX(-3px); }
+
+  .profile {
+    display: grid;
+    grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+    gap: 72px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 20px;
+    color: var(--accent-dark);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    width: 26px;
+    height: 2px;
+    display: inline-block;
+    background: var(--accent);
+    content: "";
+  }
+
+  h1 {
+    max-width: 640px;
+    margin: 0;
+    font-size: clamp(54px, 8vw, 104px);
+    font-weight: 900;
+    letter-spacing: -0.07em;
+    line-height: 0.96;
+  }
+
+  .intro {
+    max-width: 510px;
+    margin: 28px 0 0;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.75;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 34px;
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 48px;
+    padding: 0 19px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  }
+
+  .button.primary {
+    color: var(--white);
+    background: var(--ink);
+    box-shadow: 0 10px 24px rgba(20, 33, 61, 0.16);
+  }
+
+  .button.secondary { border-color: var(--line); background: rgba(255, 255, 255, 0.65); }
+  .button:hover { transform: translateY(-3px); }
+  .button.primary:hover { background: #23355d; box-shadow: 0 14px 28px rgba(20, 33, 61, 0.2); }
+
+  .profile-card {
+    position: relative;
+    min-height: 410px;
+    padding: 34px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 28px;
+    background: var(--white);
+    box-shadow: 0 24px 60px rgba(39, 61, 100, 0.12);
+  }
+
+  .profile-card::before {
+    position: absolute;
+    top: -74px;
+    right: -56px;
+    width: 210px;
+    height: 210px;
+    border-radius: 50%;
+    background: #f9c7ad;
+    content: "";
+  }
+
+  .avatar {
+    position: relative;
+    z-index: 1;
+    width: 110px;
+    height: 110px;
+    display: grid;
+    place-items: center;
+    border: 8px solid #fff3ec;
+    border-radius: 34px;
+    color: var(--white);
+    background: var(--accent);
+    font-size: 42px;
+    font-weight: 900;
+    box-shadow: 0 12px 24px rgba(239, 131, 84, 0.24);
+  }
+
+  .card-name { margin: 27px 0 5px; font-size: 27px; letter-spacing: -0.04em; }
+  .card-role { margin: 0; color: var(--muted); font-size: 14px; }
+
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 38px;
+    padding: 9px 12px;
+    border-radius: 100px;
+    color: #356143;
+    background: #edf8ef;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .status::before { width: 7px; height: 7px; border-radius: 50%; background: #56b870; content: ""; }
+
+  .details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 86px;
+    padding-top: 23px;
+    border-top: 1px solid var(--line);
+  }
+
+  .detail-label { margin: 0 0 8px; color: var(--muted); font-size: 12px; }
+  .detail-value { margin: 0; font-size: 15px; font-weight: 800; }
+
+  .section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 40px;
+    margin-top: 112px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(20, 33, 61, 0.12);
+  }
+
+  .section-title { margin: 0; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .section-copy { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .tag { padding: 10px 14px; border-radius: 10px; color: var(--blue); background: #eaf0ff; font-size: 13px; font-weight: 800; }
+
+  @media (max-width: 760px) {
+    .page { width: min(100% - 32px, 560px); padding-top: 20px; }
+    .topbar { margin-bottom: 44px; }
+    .profile { grid-template-columns: 1fr; gap: 42px; }
+    h1 { font-size: clamp(58px, 17vw, 88px); }
+    .intro { font-size: 16px; }
+    .profile-card { min-height: 0; padding: 27px; }
+    .details { margin-top: 58px; }
+    .section { grid-template-columns: 1fr; gap: 18px; margin-top: 72px; }
+  }
+
+  @media (max-width: 420px) {
+    .brand { letter-spacing: 0.08em; }
+    .back { font-size: 0; }
+    .back::before { content: "←"; font-size: 22px; }
+    .details { gap: 10px; }
+    .detail-value { font-size: 14px; }
+  }
 </style>
 </head>
 <body>
-  <a class="back" href="index.html">&larr; 메인으로</a>
-  <h1>박기환</h1>
-  <p>준비 중입니다.</p>
+  <main class="page">
+    <nav class="topbar" aria-label="페이지 탐색">
+      <a class="brand" href="index.html"><span class="brand-mark">P</span> Personal page</a>
+      <a class="back" href="index.html"><span aria-hidden="true">←</span> 메인으로</a>
+    </nav>
+
+    <section class="profile" aria-labelledby="profile-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Hello, I'm</p>
+        <h1 id="profile-title">박기환</h1>
+        <p class="intro">새로운 것을 배우고, 더 나은 방향을 찾아가는 사람입니다. 천천히 쌓아 올린 관심과 가능성을 이곳에 기록합니다.</p>
+        <div class="actions">
+          <a class="button primary" href="#about">프로필 살펴보기 <span aria-hidden="true">↘</span></a>
+          <a class="button secondary" href="index.html">참여자 목록</a>
+        </div>
+      </div>
+
+      <aside class="profile-card" aria-label="박기환 프로필 요약">
+        <div class="avatar" aria-hidden="true">기</div>
+        <h2 class="card-name">박기환</h2>
+        <p class="card-role">OTI Exam participant</p>
+        <div class="status">프로필 준비 중</div>
+        <div class="details">
+          <div><p class="detail-label">관심</p><p class="detail-value">Learning</p></div>
+          <div><p class="detail-label">방식</p><p class="detail-value">Curious</p></div>
+          <div><p class="detail-label">상태</p><p class="detail-value">Online</p></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <h2 class="section-title" id="about-title">About this page</h2>
+      <div>
+        <p class="section-copy">아직 채워가는 중인 프로필입니다. 앞으로의 관심사와 작업 이야기를 하나씩 업데이트할 예정입니다.</p>
+        <div class="tags" aria-label="관심 키워드">
+          <span class="tag">Growth</span>
+          <span class="tag">Creative thinking</span>
+          <span class="tag">New ideas</span>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
