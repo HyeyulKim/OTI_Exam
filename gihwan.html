@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="박기환의 프로필 페이지">
-<title>박기환 | Profile</title>
+<meta name="description" content="박기환의 프로필 및 자기분석 페이지">
+<title>박기환 | Profile & Self-Analysis</title>
 <style>
   :root {
     --ink: #14213d;
@@ -30,7 +30,7 @@
       var(--paper);
   }
 
-  a { color: inherit; }
+  a { color: inherit; text-decoration: none; }
 
   .page {
     width: min(1120px, calc(100% - 48px));
@@ -52,7 +52,6 @@
     font-size: 13px;
     font-weight: 800;
     letter-spacing: 0.14em;
-    text-decoration: none;
     text-transform: uppercase;
   }
 
@@ -74,7 +73,6 @@
     color: var(--muted);
     font-size: 13px;
     font-weight: 700;
-    text-decoration: none;
     transition: color 180ms ease, transform 180ms ease;
   }
 
@@ -110,10 +108,10 @@
   h1 {
     max-width: 640px;
     margin: 0;
-    font-size: clamp(54px, 8vw, 104px);
+    font-size: clamp(48px, 7vw, 90px);
     font-weight: 900;
     letter-spacing: -0.07em;
-    line-height: 0.96;
+    line-height: 1.05;
   }
 
   .intro {
@@ -141,7 +139,6 @@
     border-radius: 12px;
     font-size: 14px;
     font-weight: 800;
-    text-decoration: none;
     transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
   }
 
@@ -157,7 +154,6 @@
 
   .profile-card {
     position: relative;
-    min-height: 410px;
     padding: 34px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.8);
@@ -194,13 +190,13 @@
   }
 
   .card-name { margin: 27px 0 5px; font-size: 27px; letter-spacing: -0.04em; }
-  .card-role { margin: 0; color: var(--muted); font-size: 14px; }
+  .card-role { margin: 0; color: var(--muted); font-size: 14px; font-weight: 600; }
 
   .status {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 38px;
+    margin-top: 24px;
     padding: 9px 12px;
     border-radius: 100px;
     color: #356143;
@@ -208,95 +204,141 @@
     font-size: 12px;
     font-weight: 800;
   }
-
   .status::before { width: 7px; height: 7px; border-radius: 50%; background: #56b870; content: ""; }
 
   .details {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-    margin-top: 86px;
+    margin-top: 32px;
     padding-top: 23px;
     border-top: 1px solid var(--line);
   }
 
-  .detail-label { margin: 0 0 8px; color: var(--muted); font-size: 12px; }
-  .detail-value { margin: 0; font-size: 15px; font-weight: 800; }
+  .detail-label { margin: 0 0 4px; color: var(--muted); font-size: 12px; }
+  .detail-value { margin: 0; font-size: 14px; font-weight: 800; }
 
   .section {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 40px;
-    margin-top: 112px;
-    padding-top: 28px;
+    margin-top: 96px;
+    padding-top: 36px;
     border-top: 1px solid rgba(20, 33, 61, 0.12);
   }
 
-  .section-title { margin: 0; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; }
-  .section-copy { margin: 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
+  .section-title { margin: 0; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800; color: var(--ink); }
+  .section-copy { margin: 0 0 16px; color: var(--muted); font-size: 15px; line-height: 1.8; }
 
-  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
-  .tag { padding: 10px 14px; border-radius: 10px; color: var(--blue); background: #eaf0ff; font-size: 13px; font-weight: 800; }
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .tag { padding: 8px 14px; border-radius: 10px; color: var(--blue); background: #eaf0ff; font-size: 13px; font-weight: 800; }
+  .tag.accent { color: var(--accent-dark); background: #fff3ec; }
+
+  .grid-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .mini-card {
+    padding: 20px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+  .mini-card h4 { margin: 0 0 8px; font-size: 15px; font-weight: 800; }
+  .mini-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
 
   @media (max-width: 760px) {
     .page { width: min(100% - 32px, 560px); padding-top: 20px; }
     .topbar { margin-bottom: 44px; }
     .profile { grid-template-columns: 1fr; gap: 42px; }
-    h1 { font-size: clamp(58px, 17vw, 88px); }
+    h1 { font-size: clamp(40px, 14vw, 70px); }
     .intro { font-size: 16px; }
-    .profile-card { min-height: 0; padding: 27px; }
-    .details { margin-top: 58px; }
+    .profile-card { padding: 27px; }
     .section { grid-template-columns: 1fr; gap: 18px; margin-top: 72px; }
-  }
-
-  @media (max-width: 420px) {
-    .brand { letter-spacing: 0.08em; }
-    .back { font-size: 0; }
-    .back::before { content: "←"; font-size: 22px; }
-    .details { gap: 10px; }
-    .detail-value { font-size: 14px; }
+    .grid-cards { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
   <main class="page">
     <nav class="topbar" aria-label="페이지 탐색">
-      <a class="brand" href="index.html"><span class="brand-mark">P</span> Personal page</a>
-      <a class="back" href="index.html"><span aria-hidden="true">←</span> 메인으로</a>
+      <a class="brand" href="#"><span class="brand-mark">P</span> Personal page</a>
+      <a class="back" href="https://github.com" target="_blank">GitHub <span aria-hidden="true">↗</span></a>
     </nav>
 
+    <!-- 히어로 섹션 -->
     <section class="profile" aria-labelledby="profile-title">
       <div class="hero-copy">
-        <p class="eyebrow">Hello, I'm</p>
+        <p class="eyebrow">MSA Full Stack Developer</p>
         <h1 id="profile-title">박기환</h1>
-        <p class="intro">새로운 것을 배우고, 더 나은 방향을 찾아가는 사람입니다. 천천히 쌓아 올린 관심과 가능성을 이곳에 기록합니다.</p>
+        <p class="intro">마감기한과 신뢰성을 모두 잡는 개발자. 공공시스템의 안정성을 책임지는 백엔드 및 품질관리 전문가를 목표로 성장하고 있습니다.</p>
         <div class="actions">
-          <a class="button primary" href="#about">프로필 살펴보기 <span aria-hidden="true">↘</span></a>
-          <a class="button secondary" href="index.html">참여자 목록</a>
+          <a class="button primary" href="#skills">기술 스택 보기 <span aria-hidden="true">↘</span></a>
+          <a class="button secondary" href="#analysis">자기분석 살펴보기</a>
         </div>
       </div>
 
       <aside class="profile-card" aria-label="박기환 프로필 요약">
         <div class="avatar" aria-hidden="true">기</div>
-        <h2 class="card-name">박기환</h2>
-        <p class="card-role">OTI Exam participant</p>
-        <div class="status">프로필 준비 중</div>
+        <h2 class="card-name">박기환 (27세)</h2>
+        <p class="card-role">오티아이 & 엑사아이엔티 채용연계형 과정</p>
+        <div class="status">교육 이수 중 (2026.06 ~ 11)</div>
         <div class="details">
-          <div><p class="detail-label">관심</p><p class="detail-value">Learning</p></div>
-          <div><p class="detail-label">방식</p><p class="detail-value">Curious</p></div>
-          <div><p class="detail-label">상태</p><p class="detail-value">Online</p></div>
+          <div>
+            <p class="detail-label">거주지</p>
+            <p class="detail-value">서울특별시</p>
+          </div>
+          <div>
+            <p class="detail-label">학력</p>
+            <p class="detail-value">평택대학교 졸업</p>
+          </div>
         </div>
       </aside>
     </section>
 
-    <section class="section" id="about" aria-labelledby="about-title">
-      <h2 class="section-title" id="about-title">About this page</h2>
+    <!-- 기술 스택 섹션 -->
+    <section class="section" id="skills" aria-labelledby="skills-title">
+      <h2 class="section-title" id="skills-title">Tech Stack</h2>
       <div>
-        <p class="section-copy">아직 채워가는 중인 프로필입니다. 앞으로의 관심사와 작업 이야기를 하나씩 업데이트할 예정입니다.</p>
-        <div class="tags" aria-label="관심 키워드">
-          <span class="tag">Growth</span>
-          <span class="tag">Creative thinking</span>
-          <span class="tag">New ideas</span>
+        <p class="section-copy">국가인전자원개발컨소시엄 MSA기반 Full Stack 개발자 양성과정에서 집중적으로 다루고 있는 핵심 기술입니다.</p>
+        <div class="tags" aria-label="기술 스택 목록">
+          <span class="tag">Java</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Spring Framework</span>
+          <span class="tag">Oracle SQL</span>
+          <span class="tag">MyBatis</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 성격 및 장단점 섹션 -->
+    <section class="section" id="analysis" aria-labelledby="analysis-title">
+      <h2 class="section-title" id="analysis-title">Self Analysis</h2>
+      <div>
+        <p class="section-copy">PDF 자기분석을 통해 파악한 저의 강점과 보완점입니다.</p>
+        <div class="grid-cards">
+          <div class="mini-card">
+            <h4>💡 장점 및 특징</h4>
+            <p>긍정적 마인드, 타인 의견 경청, 철저한 마감기한 준수</p>
+          </div>
+          <div class="mini-card">
+            <h4>🛠️ 보완하고 싶은 점</h4>
+            <p>시작 단계의 과도한 신중함과 거절이 어려운 우유부단함 극복 중</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 입사 희망 분야 섹션 -->
+    <section class="section" aria-labelledby="goal-title">
+      <h2 class="section-title" id="goal-title">Career Goal</h2>
+      <div>
+        <p class="section-copy">안정적인 공공 시스템 운영과 신뢰도 높은 서비스 구축에 기여하고자 합니다.</p>
+        <div class="tags">
+          <span class="tag accent">오티아이 : 공공 웹 백엔드 개발자</span>
+          <span class="tag accent">엑사아이엔티 : 공공 시스템 품질관리 (QA/QC)</span>
         </div>
       </div>
     </section>
