@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>박기환 | Full Stack 개발자 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F3EBDD;
+    --bg-card: #FBF7EF;
+    --ink: #2A241C;
+    --ink-soft: #6B6255;
+    --accent: #A9791F;
+    --accent-soft: #E4C98B;
+    --dark: #221E17;
+    --line: #DCD0BA;
+    --radius: 6px;
+    --max: 960px;
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter', system-ui, "Malgun Gothic", sans-serif;
+    line-height:1.6;
+  }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; letter-spacing:-0.01em; }
+  a{ color:inherit; }
+  .wrap{ max-width:var(--max); margin:0 auto; padding:0 24px; }
+
+  /* 상단 네비게이션: 실제 섹션으로 스크롤 이동 (기능 O) */
+  header.nav{
+    position:sticky; top:0; z-index:10;
+    background:rgba(243,235,221,0.92); backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{ display:flex; justify-content:space-between; align-items:center; padding:14px 24px; max-width:var(--max); margin:0 auto; }
+  .nav-name{ font-family:'Fraunces', serif; font-weight:600; font-size:18px; }
+  .nav-links{ list-style:none; display:flex; gap:20px; font-size:14px; }
+  .nav-links a{ text-decoration:none; padding:4px 2px; border-bottom:1px solid transparent; }
+  .nav-links a:hover, .nav-links a:focus-visible{ border-bottom-color:var(--accent); }
+
+  section{ padding:72px 0; }
+  #section-hero{ padding-top:56px; }
+  .section-eyebrow{ font-size:13px; color:var(--ink-soft); margin-bottom:6px; }
+  .section-title{ font-size:26px; margin-bottom:32px; }
+
+  /* HERO */
+  .hero-grid{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:48px; align-items:center; }
+  .hero-name{ font-size:44px; line-height:1.1; margin-bottom:8px; }
+  .hero-role{ color:var(--accent); font-size:17px; font-weight:500; margin-bottom:20px; }
+  .hero-bio{ color:var(--ink-soft); max-width:46ch; margin-bottom:28px; }
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 20px; border-radius:var(--radius);
+    font-size:14px; font-weight:500; text-decoration:none;
+    border:1px solid var(--ink); cursor:pointer;
+  }
+  .btn-solid{ background:var(--ink); color:var(--bg-card); border-color:var(--ink); }
+  .btn-solid:hover, .btn-solid:focus-visible{ background:var(--accent); border-color:var(--accent); }
+  .btn-outline:hover, .btn-outline:focus-visible{ background:var(--ink); color:var(--bg-card); }
+  .btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+  .avatar-box{
+    aspect-ratio:3/4; border-radius:var(--radius);
+    background:linear-gradient(160deg, var(--accent-soft), var(--accent));
+    display:flex; align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+  }
+  .avatar-initials{ font-family:'Fraunces', serif; font-size:88px; color:var(--dark); opacity:0.85; }
+  .avatar-note{
+    position:absolute; bottom:10px; left:10px; right:10px;
+    font-size:11px; color:var(--dark); background:rgba(255,255,255,0.55);
+    padding:6px 8px; border-radius:4px;
+  }
+
+  /* STRENGTHS */
+  .strength-row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; border-bottom:1px solid var(--line);
+  }
+  .strength-row:first-of-type{ border-top:1px solid var(--line); }
+  .strength-name{ font-weight:500; }
+  .strength-desc{ color:var(--ink-soft); font-size:14px; margin-top:2px; }
+  .tag-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+  .tag{
+    font-size:13px; padding:6px 12px; border-radius:999px;
+    background:var(--bg-card); border:1px solid var(--line); color:var(--ink);
+  }
+
+  /* PROJECTS */
+  .project-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:20px; }
+  .project-card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px; text-decoration:none; color:var(--ink);
+    transition:border-color 0.15s ease;
+  }
+  .project-card:hover, .project-card:focus-visible{ border-color:var(--accent); }
+  .project-card h3{ font-size:18px; margin-bottom:8px; }
+  .project-card p{ color:var(--ink-soft); font-size:14px; margin-bottom:12px; }
+  .project-link{ font-size:13px; color:var(--accent); font-weight:500; }
+
+  /* TIMELINE */
+  .timeline-item{ display:flex; gap:20px; padding:18px 0; border-bottom:1px solid var(--line); }
+  .timeline-item:first-of-type{ border-top:1px solid var(--line); }
+  .timeline-date{ min-width:150px; color:var(--ink-soft); font-size:14px; }
+  .timeline-body h3{ font-size:16px; margin-bottom:4px; }
+  .timeline-body p{ color:var(--ink-soft); font-size:14px; }
+
+  /* GOALS / QUOTES (참고 이미지의 testimonials 자리 -> 취준생 다짐으로 재구성) */
+  .quote-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .quote-card{ background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius); padding:24px; }
+  .quote-card p.q{ font-size:15px; margin-bottom:14px; }
+  .quote-card p.who{ font-size:13px; color:var(--ink-soft); }
+
+  /* STATS BAR (다크, 참고 이미지의 팔로워 수 자리 -> 학습 지표로 재구성) */
+  .stats-bar{ background:var(--dark); color:var(--bg-card); padding:0; }
+  .stats-grid{ max-width:var(--max); margin:0 auto; display:grid; grid-template-columns:repeat(3, 1fr); }
+  .stat{ padding:36px 24px; text-align:center; border-left:1px solid rgba(255,255,255,0.12); }
+  .stat:first-child{ border-left:none; }
+  .stat .num{ font-family:'Fraunces', serif; font-size:30px; color:var(--accent-soft); }
+  .stat .label{ font-size:13px; color:#C9C0AF; margin-top:4px; }
+
+  /* CONTACT */
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:32px; }
+  .contact-list{ list-style:none; }
+  .contact-list li{ display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .contact-list a{ text-decoration:none; color:var(--accent); font-weight:500; }
+  .contact-list a:hover, .contact-list a:focus-visible{ text-decoration:underline; }
+  .target-item{ margin-bottom:18px; }
+  .target-item h3{ font-size:15px; margin-bottom:4px; }
+  .target-item p{ font-size:13px; color:var(--ink-soft); }
+
+  footer{ text-align:center; padding:32px 24px; font-size:12px; color:var(--ink-soft); }
+
+  /* 반응형 - 모바일 대응 */
+  @media (max-width: 720px){
+    .nav-links{ display:none; }
+    .hero-grid, .contact-grid{ grid-template-columns:1fr; }
+    .hero-grid{ }
+    .avatar-box{ order:-1; max-width:220px; margin:0 auto; }
+    .project-grid, .quote-grid{ grid-template-columns:1fr; }
+    .stats-grid{ grid-template-columns:1fr; }
+    .stat{ border-left:none; border-top:1px solid rgba(255,255,255,0.12); }
+    .stat:first-child{ border-top:none; }
+    .hero-name{ font-size:32px; }
+  }
+
+  /* 모션 최소화 존중 */
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ transition:none !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="nav-name">박기환</span>
+    <ul class="nav-links">
+      <li><a href="#section-hero">소개</a></li>
+      <li><a href="#section-strengths">역량</a></li>
+      <li><a href="#section-projects">프로젝트</a></li>
+      <li><a href="#section-timeline">학력</a></li>
+      <li><a href="#section-contact">연락처</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============================================ -->
+<!-- 1. HERO -->
+<!-- ============================================ -->
+<section id="section-hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="hero-name">박기환</p>
+      <p class="hero-role">MSA 기반 Full Stack 개발자 지망 · 공공 웹/품질 분야</p>
+      <p class="hero-bio">
+        약속된 마감기한을 철저히 지키고, 경청을 통해 요구사항을 유연하게 조율하는
+        신입 개발자입니다. 마감기한과 신뢰성을 모두 잡는 개발자를 목표로 합니다.
+      </p>
+      <div class="cta-row">
+        <!-- 실제 이력서 파일 경로로 교체 필요: 현재는 자리표시 링크 -->
+        <a class="btn btn-solid" href="#" download>이력서 다운로드</a>
+        <a class="btn btn-outline" href="#section-contact">연락하기</a>
+      </div>
+    </div>
+    <div class="avatar-box">
+      <span class="avatar-initials">박기환</span>
+      <span class="avatar-note">실제 프로필 사진으로 교체 예정 자리</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 2. STRENGTHS -->
+<!-- ============================================ -->
+<section id="section-strengths">
+  <div class="wrap">
+    <p class="section-eyebrow">Strengths</p>
+    <h2 class="section-title">핵심 역량</h2>
+
+    <div class="strength-row">
+      <div>
+        <p class="strength-name">마감기한 준수</p>
+        <p class="strength-desc">약속된 일정을 철저히 지키는 신뢰성</p>
+      </div>
+    </div>
+    <div class="strength-row">
+      <div>
+        <p class="strength-name">경청과 조율</p>
+        <p class="strength-desc">타인의 의견을 듣고 유연하게 피드백을 반영하는 능력</p>
+      </div>
+    </div>
+    <div class="strength-row">
+      <div>
+        <p class="strength-name">긍정적 마음가짐</p>
+        <p class="strength-desc">시작 단계의 신중함을 실행력으로 전환하려 노력 중</p>
+      </div>
+    </div>
+
+    <div class="tag-list">
+      <span class="tag">Java</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">Oracle SQL</span>
+      <span class="tag">MyBatis</span>
+      <span class="tag">Spring Framework</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 3. PROJECTS -->
+<!-- 실제 프로젝트 상세 내용은 추후 채워 넣을 자리 -->
+<!-- ============================================ -->
+<section id="section-projects">
+  <div class="wrap">
+    <p class="section-eyebrow">Projects</p>
+    <h2 class="section-title">프로젝트</h2>
+    <div class="project-grid">
+      <a class="project-card" href="#">
+        <h3>게시판(Board) 프로젝트</h3>
+        <p>스프링 MVC 기반 게시판 · 상세 설명 추가 예정</p>
+        <span class="project-link">자세히 보기 →</span>
+      </a>
+      <a class="project-card" href="#">
+        <h3>출석 스케줄러 프로젝트</h3>
+        <p>Oracle DBMS_SCHEDULER 활용 · 상세 설명 추가 예정</p>
+        <span class="project-link">자세히 보기 →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 4. TIMELINE -->
+<!-- ============================================ -->
+<section id="section-timeline">
+  <div class="wrap">
+    <p class="section-eyebrow">Education</p>
+    <h2 class="section-title">학력 및 교육</h2>
+
+    <div class="timeline-item">
+      <p class="timeline-date">2026.06 – 2026.11</p>
+      <div class="timeline-body">
+        <h3>KOSA MSA기반 FullStack 개발 전문가 양성과정</h3>
+        <p>국가인적자원개발컨소시엄 · 오티아이 &amp; 엑사아이엔티 채용연계형</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <p class="timeline-date">졸업</p>
+      <div class="timeline-body">
+        <h3>대학교 졸업</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- 5. GOALS (참고 이미지의 Testimonials 자리를 취준생 다짐으로 재구성) -->
+<!-- ============================================ -->
+<section id="section-goals">
+  <div class="wrap">
+    <p class="section-eyebrow">Commitment</p>
+    <h2 class="section-title">다짐</h2>
+    <div class="quote-grid">
+      <div class="quote-card">
+        <p class="q">"프로그램 마감기한을 준수하며 팀원들과 유연하게 소통하는 능력을 키우고, 회사에 즉시 기여할 수 있는 신입 개발자로 성장하겠습니다."</p>
+        <p class="who">교육생으로서의 목표</p>
+      </div>
+      <div class="quote-card">
+        <p class="q">"공공시스템을 안정적으로 운영하며, 사용자와 고객사의 요구사항을 경청하고 유연하게 조율하는 개발자가 되겠습니다."</p>
+        <p class="who">프로그래머로서의 목표</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR (참고 이미지의 팔로워 지표 자리를 학습 지표로 재구성) -->
+<div class="stats-bar">
+  <div class="stats-grid">
+    <div class="stat">
+      <p class="num">5개월</p>
+      <p class="label">MSA Full Stack 양성과정</p>
+    </div>
+    <div class="stat">
+      <p class="num">?/?</p>
+      <p class="label">전공 학점</p>
+    </div>
+    <div class="stat">
+      <p class="num">5종</p>
+      <p class="label">핵심 기술 스택</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 6. CONTACT -->
+<!-- ============================================ -->
+<section id="section-contact">
+  <div class="wrap contact-grid">
+    <div>
+      <p class="section-eyebrow">Contact</p>
+      <h2 class="section-title">연락처</h2>
+      <ul class="contact-list">
+        <li>거주 <span>서울특별시</span></li>
+        <!-- 실제 이메일/전화번호로 교체 필요 -->
+        <li>이메일 <a href="mailto:example@email.com">example@email.com</a></li>
+        <li>GitHub <a href="https://github.com" target="_blank" rel="noopener">github.com/아이디</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="section-eyebrow">Target Companies</p>
+      <h2 class="section-title">입사 희망 분야</h2>
+      <div class="target-item">
+        <h3>오티아이 · 공공 웹 백엔드 개발자</h3>
+        <p>대법원 등 국가 공공 시스템의 안정성을 책임지는 웹 개발 분야에 기여하고 싶습니다.</p>
+      </div>
+      <div class="target-item">
+        <h3>엑사아이엔티 · 공공 시스템 품질관리(QA/QC)</h3>
+        <p>공공 대민 플랫폼 사업에서 신뢰받는 품질관리자가 되고 싶습니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 박기환 Portfolio</footer>
+
+</body>
+</html>
