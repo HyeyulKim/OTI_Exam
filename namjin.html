@@ -309,6 +309,30 @@
         color:var(--muted);
         font-size:.94rem
       }
+      .project-details {
+        display:grid;
+        gap:12px;
+        margin:0 0 24px;
+        padding:18px;
+        border-radius:12px;
+        background:#f8fbff
+      }
+      .project-details div {
+        display:grid;
+        grid-template-columns:64px 1fr;
+        gap:10px;
+        align-items:start
+      }
+      .project-details dt {
+        color:var(--blue);
+        font-size:.78rem;
+        font-weight:800
+      }
+      .project-details dd {
+        margin:0;
+        color:#47637e;
+        font-size:.84rem
+      }
       .project a {
         display:inline-flex;
         width:max-content;
@@ -432,6 +456,10 @@
           grid-template-columns:1fr
         }
         .facts div {
+          grid-template-columns:1fr;
+          gap:3px
+        }
+        .project-details div {
           grid-template-columns:1fr;
           gap:3px
         }
@@ -586,12 +614,32 @@
                 <span class="project-label">COMMON PROJECT</span>
                 <h3>재난 대응체계 개선을 위한 지역별 대피소 포격위험도 및 수용포화도 분석</h3>
                 <p>지역별 대피소의 위험도와 수용 현황을 분석해 재난 대응체계 개선에 필요한 인사이트를 도출한 데이터 분석 프로젝트입니다.</p>
+                <dl class="project-details">
+                  <div>
+                    <dt>주요 역할</dt>
+                    <dd>지역별 자원 현황을 비교할 수 있도록 데이터 분석과 결과 시각화를 담당했습니다.</dd>
+                  </div>
+                  <div>
+                    <dt>핵심 성과</dt>
+                    <dd>지역 간 자원 격차와 개선이 필요한 지점을 한눈에 파악할 수 있도록 정리했습니다.</dd>
+                  </div>
+                </dl>
                 <a href="https://drive.google.com/file/d/148A0XWBOTVsXIrfGAzc36Snb9Y51c2nd/view?usp=sharing" target="_blank" rel="noopener noreferrer">프로젝트 자료 보기</a>
               </article>
               <article class="project">
                 <span class="project-label">FINAL PROJECT</span>
                 <h3>기동무기체계 피아식별 AI 시스템</h3>
                 <p>기동무기체계 환경에서 피아를 식별하기 위한 AI 시스템 프로젝트입니다. 서비스 기술서와 함께 프로젝트의 설계 방향을 확인할 수 있습니다.</p>
+                <dl class="project-details">
+                  <div>
+                    <dt>프로젝트 목표</dt>
+                    <dd>기동무기체계 운용 환경에서 객체를 탐지·분류해 피아를 신속히 식별하고, 오인 교전 위험을 낮추는 AI 시스템을 구현하는 것입니다.</dd>
+                  </div>
+                  <div>
+                    <dt>기획 포인트</dt>
+                    <dd>실시간 영상 입력의 식별 결과를 직관적으로 전달하고, 모델 추론 결과를 제공할 수 있는 서비스 흐름을 설계했습니다.</dd>
+                  </div>
+                </dl>
                 <a href="https://drive.google.com/file/d/1RH2xGK3lBiv6lYzJ6s_AO7CeTAkMJ4Hi/view?usp=sharing" target="_blank" rel="noopener noreferrer">프로젝트 자료 보기</a>
                 <a href="https://drive.google.com/file/d/1KCbKPiE2kxsFUVaDpq8SL7lTvafkU86a/view?usp=sharing" target="_blank" rel="noopener noreferrer">서비스 기술서 보기</a>
               </article>
