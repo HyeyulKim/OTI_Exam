@@ -1,0 +1,237 @@
+<!-- File timestamp: 2026-09-10 22:45:00 +09:00 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>정규화 퀴즈 교사 성적 보고서</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #65717c;
+      --paper: #fffdf8;
+      --line: #e6ded1;
+      --accent: #b94327;
+      --accent-soft: #fff1e8;
+      --background: #f3eee5;
+      --success: #176b3a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      color: var(--ink);
+      background: linear-gradient(145deg, #f7f1e8, var(--background));
+      font-family: "Malgun Gothic", "Apple SD Gothic Neo", sans-serif;
+    }
+
+    main {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      padding: clamp(1.25rem, 4vw, 3rem);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 55px rgb(88 65 39 / 14%);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.5rem;
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    h1 { margin: 0; font-size: clamp(1.8rem, 5vw, 2.8rem); }
+    h2 { margin: 0 0 0.8rem; font-size: 1.1rem; }
+    .meta { margin: 0.75rem 0 2rem; color: var(--muted); }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary-card {
+      padding: 1rem;
+      background: var(--accent-soft);
+      border: 1px solid var(--line);
+    }
+
+    .summary-card span { display: block; color: var(--muted); font-size: 0.8rem; }
+    .summary-card strong { display: block; margin-top: 0.4rem; font-size: 1.35rem; }
+
+    section { margin-top: 2rem; }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 620px; }
+    th, td { padding: 0.8rem 0.65rem; border-bottom: 1px solid var(--line); text-align: left; }
+    th { color: var(--muted); font-size: 0.8rem; }
+    td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5) { text-align: center; }
+
+    .grade {
+      display: inline-block;
+      min-width: 2rem;
+      padding: 0.25rem 0.45rem;
+      color: #fff;
+      font-weight: 700;
+      text-align: center;
+      background: var(--accent);
+    }
+
+    .grade-D { background: #65717c; }
+    .grade-C { background: #a97828; }
+    .grade-B { background: #2f7795; }
+    .grade-A { background: var(--success); }
+
+    .notice {
+      padding: 1rem;
+      color: var(--muted);
+      background: #f6f1e9;
+      border-left: 4px solid var(--accent);
+    }
+
+    .grade-guide {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.25rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer { margin-top: 2rem; color: var(--muted); font-size: 0.8rem; }
+
+    @media (max-width: 650px) {
+      body { padding: 1rem 0.5rem; }
+      main { padding: 1.25rem 1rem; }
+      .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">TEACHER MODE</p>
+    <h1>정규화 퀴즈 교사 성적 보고서</h1>
+    <p class="meta">생성 시각: <time id="generated-at"></time></p>
+
+    <section aria-labelledby="summary-title">
+      <h2 id="summary-title">한눈에 보기</h2>
+      <div class="summary">
+        <div class="summary-card"><span>학생 수</span><strong id="student-count">0명</strong></div>
+        <div class="summary-card"><span>평균</span><strong id="average-score">-</strong></div>
+        <div class="summary-card"><span>최고점</span><strong id="highest-score">-</strong></div>
+        <div class="summary-card"><span>최저점</span><strong id="lowest-score">-</strong></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="grade-title">
+      <h2 id="grade-title">상대평가 기준</h2>
+      <div class="grade-guide">
+        <span>A: 상위 20%</span>
+        <span>B: 상위 40%</span>
+        <span>C: 상위 70%</span>
+        <span>D: 하위 30%</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="ranking-title">
+      <h2 id="ranking-title">학생별 결과</h2>
+      <div id="empty-notice" class="notice" hidden>저장된 학생 성적이 없습니다. 퀴즈 결과에서 닉네임을 기록하면 이 보고서에 표시됩니다.</div>
+      <div class="table-wrap">
+        <table id="ranking-table" hidden>
+          <thead>
+            <tr>
+              <th>순위</th>
+              <th>학생</th>
+              <th>점수</th>
+              <th>백분율</th>
+              <th>등급</th>
+            </tr>
+          </thead>
+          <tbody id="ranking-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="limits-title">
+      <h2 id="limits-title">데이터 제한</h2>
+      <p class="notice">현재 게임은 학생별 총점과 랭킹만 저장합니다. 문항별 정답률과 카테고리별 성적은 수집되지 않아 이 보고서에서 계산하지 않습니다.</p>
+    </section>
+
+    <footer>저장 키: normalization-quiz-ranking</footer>
+  </main>
+
+  <script>
+    const storageKey = "normalization-quiz-ranking";
+
+    function loadRecords() {
+      try {
+        const records = JSON.parse(localStorage.getItem(storageKey) || "[]");
+        return Array.isArray(records) ? records : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function getGrade(index, total) {
+      const percentile = (index + 1) / total;
+      if (percentile <= 0.2) return "A";
+      if (percentile <= 0.4) return "B";
+      if (percentile <= 0.7) return "C";
+      return "D";
+    }
+
+    function formatPercent(value) {
+      return `${value.toFixed(1)}%`;
+    }
+
+    function renderReport() {
+      const records = loadRecords()
+        .filter((record) => record && typeof record.nickname === "string" && Number.isFinite(record.score)
+          && Number.isFinite(record.total) && record.total > 0 && record.score >= 0 && record.score <= record.total)
+        .sort((first, second) => {
+          const difference = second.score / second.total - first.score / first.total;
+          return difference || second.score - first.score || (first.createdAt || 0) - (second.createdAt || 0);
+        });
+
+      document.querySelector("#generated-at").textContent = new Date().toLocaleString("ko-KR");
+      document.querySelector("#student-count").textContent = `${records.length}명`;
+
+      if (records.length === 0) {
+        document.querySelector("#empty-notice").hidden = false;
+        return;
+      }
+
+      const percentages = records.map((record) => record.score / record.total * 100);
+      const average = percentages.reduce((sum, value) => sum + value, 0) / percentages.length;
+      document.querySelector("#average-score").textContent = formatPercent(average);
+      document.querySelector("#highest-score").textContent = formatPercent(Math.max(...percentages));
+      document.querySelector("#lowest-score").textContent = formatPercent(Math.min(...percentages));
+      document.querySelector("#ranking-table").hidden = false;
+      document.querySelector("#ranking-body").replaceChildren(...records.map((record, index) => {
+        const row = document.createElement("tr");
+        const percentage = record.score / record.total * 100;
+        const grade = getGrade(index, records.length);
+        [index + 1, record.nickname, `${record.score} / ${record.total}`, formatPercent(percentage)].forEach((value) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.append(cell);
+        });
+        const gradeCell = document.createElement("td");
+        const gradeBadge = document.createElement("span");
+        gradeBadge.className = `grade grade-${grade}`;
+        gradeBadge.textContent = grade;
+        gradeCell.append(gradeBadge);
+        row.append(gradeCell);
+        return row;
+      }));
+    }
+
+    renderReport();
+  </script>
+</body>
+</html>

@@ -71,7 +71,7 @@
     align-items: center;
     gap: 8px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 700;
     transition: color 180ms ease, transform 180ms ease;
   }
@@ -113,6 +113,22 @@
     letter-spacing: -0.07em;
     line-height: 1.05;
   }
+
+  .title-row {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .github-link {
+    color: var(--blue);
+    font-size: 15px;
+    font-weight: 800;
+    transition: color 180ms ease, transform 180ms ease;
+  }
+
+  .github-link:hover { color: var(--accent-dark); transform: translateY(-2px); }
 
   .intro {
     max-width: 510px;
@@ -178,14 +194,11 @@
     z-index: 1;
     width: 110px;
     height: 110px;
-    display: grid;
-    place-items: center;
+    display: block;
+    object-fit: cover;
     border: 8px solid #fff3ec;
     border-radius: 34px;
-    color: var(--white);
     background: var(--accent);
-    font-size: 42px;
-    font-weight: 900;
     box-shadow: 0 12px 24px rgba(239, 131, 84, 0.24);
   }
 
@@ -265,23 +278,29 @@
   <main class="page">
     <nav class="topbar" aria-label="페이지 탐색">
       <a class="brand" href="#"><span class="brand-mark">P</span> Personal page</a>
-      <a class="back" href="https://github.com" target="_blank">GitHub <span aria-hidden="true">↗</span></a>
+      <a class="back" href="index.html">&larr; 메인으로</a>
     </nav>
 
     <!-- 히어로 섹션 -->
     <section class="profile" aria-labelledby="profile-title">
       <div class="hero-copy">
         <p class="eyebrow">MSA Full Stack Developer</p>
-        <h1 id="profile-title">박기환</h1>
+        <!-- Updated: 2026-09-10 21:50:37 +09:00 -->
+        <div class="title-row">
+          <h1 id="profile-title">박기환</h1>
+          <a class="github-link" href="https://github.com" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+        </div>
         <p class="intro">마감기한과 신뢰성을 모두 잡는 개발자. 공공시스템의 안정성을 책임지는 백엔드 및 품질관리 전문가를 목표로 성장하고 있습니다.</p>
         <div class="actions">
           <a class="button primary" href="#skills">기술 스택 보기 <span aria-hidden="true">↘</span></a>
           <a class="button secondary" href="#analysis">자기분석 살펴보기</a>
+          <a class="button secondary" href="gihwan/Study-03/quiz.html">퀴즈 프로젝트 살펴보기</a>
         </div>
       </div>
 
       <aside class="profile-card" aria-label="박기환 프로필 요약">
-        <div class="avatar" aria-hidden="true">기</div>
+        <!-- Updated: 2026-09-10 -->
+        <img class="avatar" src="gihwan/sky1.jpg" alt="푸른 하늘과 초원이 있는 풍경">
         <h2 class="card-name">박기환 (27세)</h2>
         <p class="card-role">오티아이 & 엑사아이엔티 채용연계형 과정</p>
         <div class="status">교육 이수 중 (2026.06 ~ 11)</div>
@@ -317,7 +336,6 @@
     <section class="section" id="analysis" aria-labelledby="analysis-title">
       <h2 class="section-title" id="analysis-title">Self Analysis</h2>
       <div>
-        <p class="section-copy">PDF 자기분석을 통해 파악한 저의 강점과 보완점입니다.</p>
         <div class="grid-cards">
           <div class="mini-card">
             <h4>💡 장점 및 특징</h4>
